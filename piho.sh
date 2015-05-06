@@ -15,7 +15,7 @@ RASPBIAN_LATEST="http://downloads.raspberrypi.org/raspbian_latest"
 PIHO_IMAGE="${PIHO_IMAGE:-"$PIHO_HOME/base.img"}"
 PIHO_IMAGE_URL="${PIHO_IMAGE_URL:-"$RASPBIAN_LATEST"}"
 
-PIHO_DOCKER_BASE_IMAGE="${PIHO_DOCKER_BASE_IMAGE:-"dockerfile/ubuntu"}"
+PIHO_DOCKER_BASE_IMAGE="${PIHO_DOCKER_BASE_IMAGE:-"ubuntu:latest"}"
 PIHO_DOCKER_IMAGE="${PIHO_DOCKER_IMAGE:-"xdissent/pihotenuse"}"
 
 PIHO_DEBS="${PIHO_DEBS:-"$PIHO_HOME/debs"}"
