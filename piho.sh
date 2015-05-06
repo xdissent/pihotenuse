@@ -86,6 +86,7 @@ b2d_init() {
   
   debug "Creating boot2docker profile"
   [ -f "$BOOT2DOCKER_PROFILE" ] || cat > "$BOOT2DOCKER_PROFILE" <<EOF
+SSHPort = 2023
 SSHKey = "$HOME/.ssh/id_pihotenuse"
 VM = "pihotenuse-vm"
 EOF
