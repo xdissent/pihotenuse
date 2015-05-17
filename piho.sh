@@ -673,8 +673,10 @@ chroot_setup() {
   debug "Fixing hostname resolution for chroot"
   echo "127.0.1.1 $(hostname) #$PIHO_SENTINEL" >> mount/etc/hosts
 
-  debug "Disabling ld preloads for chroot"
-  sed -i "s/^\\([^#]\\)/#$PIHO_SENTINEL \\1/" mount/etc/ld.so.preload
+  [ ! -f mount/etc/ld.so.preload ] || {
+    debug "Disabling ld preloads for chroot"
+    sed -i "s/^\\([^#]\\)/#$PIHO_SENTINEL \\1/" mount/etc/ld.so.preload
+  }
 
   debug "Adding local debs apt source"
   echo "deb file:$PIHO_DEBS ./" > mount/etc/apt/sources.list.d/piho.list
@@ -727,8 +729,10 @@ chroot_cleanup() {
   debug "Removing apt source"
   rm -f mount/etc/apt/sources.list.d/piho.list
 
-  debug "Restoring ld preloads"
-  sed -i "s/^#$PIHO_SENTINEL //" mount/etc/ld.so.preload
+  [ ! -f mount/etc/ld.so.preload ] || {
+    debug "Restoring ld preloads"
+    sed -i "s/^#$PIHO_SENTINEL //" mount/etc/ld.so.preload
+  }
 
   debug "Remove host hostname entry from chroot"
   sed -i "/$PIHO_SENTINEL/d" mount/etc/hosts
