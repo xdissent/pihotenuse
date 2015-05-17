@@ -661,10 +661,13 @@ chroot_setup() {
   debug "Attaching nbd device $NBD_DEV"
   qemu-nbd -c "$NBD_DEV" build.qcow2 &> /dev/null
 
+  debug "Determining partition offsets"
+  local OFFSETS=($(fdisk -l "$NBD_DEV" | tail -2 | awk '{print $2}'))
+
   debug "Mounting image"
   mkdir -p mount
-  mount -o offset=$((512*122880)) "$NBD_DEV" mount
-  mount -o offset=$((512*8192)) "$NBD_DEV" mount/boot
+  mount -o offset=$((512*${OFFSETS[1]})) "$NBD_DEV" mount
+  mount -o offset=$((512*${OFFSETS[0]})) "$NBD_DEV" mount/boot
   mount -t proc none mount/proc
 
   debug "Fixing hostname resolution for chroot"
