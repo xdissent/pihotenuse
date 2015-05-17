@@ -1,6 +1,6 @@
 #!/usr/bin/env bash #                 To install: bash <(curl https://piho.sh)
 [ -z "${0##/dev/fd*}" ] && cp "$0" "$TMPDIR/piho" && bash "$_" install || true
-#!/usr/bin/env bash #                                        pihotenuse v0.0.2
+#!/usr/bin/env bash #                                        pihotenuse v0.0.3
 #                                                          https://pihotenu.se
 
 set -e
